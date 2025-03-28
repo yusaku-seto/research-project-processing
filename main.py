@@ -57,6 +57,7 @@ def main():
     data_manager.save_metrics(df)
 
     config.logging.clear_logging()
+    return df
 
 
 if __name__ == "__main__":
