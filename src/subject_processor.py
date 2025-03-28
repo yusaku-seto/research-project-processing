@@ -91,7 +91,6 @@ class SubjectProcessor:
             )
             for experiment in self.experiments.values()
         ]
-        logging.info(self.experiment_processors)
 
     # 特定の値からexperiment番号を取得する関数
     def get_experiment_number(self, value):
