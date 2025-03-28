@@ -58,12 +58,10 @@ def plot_t_v_a_gas_distance_by_type(
         ego_acceleration = df[df_simout_columns.ego_a]
         Brake_Out = df[df_simout_columns.Brake_Out]
 
-        # ego_distances_to_collision_point = df["ego_distances_to_collision_point"]
         df_plot = pd.DataFrame()
         df_plot["ego_velocity"] = ego_velocity
         df_plot["ego_acceleration"] = ego_acceleration
         df_plot["Brake_Out"] = Brake_Out
-        # df_plot["ego_distances_to_collision_point"] = ego_distances_to_collision_point
         df_plot.index = distance
         # 各行にプロット
         for i, col in enumerate(df_plot.columns):
@@ -85,10 +83,6 @@ def plot_t_v_a_gas_distance_by_type(
                 axis="y", which="both", pad=10
             )  # y軸の目盛ラベルを10ピクセル離す
             # ax.set_ylabel(col)
-
-        df_infomation_id = df_all_subject_results[
-            df_all_subject_results["subject_id"] == id
-        ]
 
     # ax.set_ylim(0, int(key)+5)
     # Ego速度のプロット
@@ -146,26 +140,7 @@ def plot_t_v_a_gas_distance_individual(
     label_font_size = 18
     label_font_size_small = label_font_size - 1
 
-    # collision_point_y_list
-
-    # fig, ax1 = plt.subplots()
     fig, axes = plt.subplots(nrows=len(df_dict), figsize=(12, 4 * len(df_dict)))
-    # 凡例の作成（透過なし）
-    # handles1, labels1 = ax1.get_legend_handles_labels()
-    # handles2, labels2 = ax2.get_legend_handles_labels()
-    # ax1.legend(
-    #     handles1 + handles2,
-    #     labels1 + labels2,
-    #     loc="upper left",
-    #     bbox_to_anchor=(0.2, 0.25),
-    #     facecolor="white",
-    #     framealpha=1,
-    #     fontsize=20,
-    # )
-
-    # グリッドの設定
-    # ax1.grid(True)
-    # 各行にプロット
     for i, (key, df) in enumerate(df_dict.items()):
         dt = df[df_simout_columns.time].iloc[1] - df[df_simout_columns.time].iloc[0]
         df = metric_calculator.add_mileage_column(dt=dt, df=df)

@@ -63,25 +63,7 @@ with st.sidebar:
         horizontal=True,
     )
 
-    # if files:
-    #     if st.button("filesとconfig_typeを確認する"):
-    #         st.write(f"{files}, {config_type}")
-    #         if st.button("filesとconfig_typeを初期化する"):
-    #             st.session_state.files = None
-    #             st.session_state.config_type = None
-
-    #             st.experimental_user()
     st.title("軌跡を可視化します")
-
-    # else:
-    #     config_type = st.radio(
-    #         label="道路のタイプを選択してください",
-    #         options=("A", "B"),
-    #         index=0,
-    #         horizontal=True,
-    #     )
-
-    # subject_id = st.text_input("被験者IDを入力してください")
 
     st.text(f"道路のタイプは{experiment_condition}です")
 
