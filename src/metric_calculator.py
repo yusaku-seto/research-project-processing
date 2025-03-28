@@ -60,6 +60,24 @@ class MetricCalculator:
         average_velocity = df[self.df_simout_columns.ego_v].mean()
         return average_velocity
 
+    def add_mileage_column(self, dt: float, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        走行距離列を追加
+
+        Attributes (Input)
+        ------------------
+        df (pd.Dataframe): simulinkから取得したcsvファイルのdf
+
+        Attributes (Output)
+        -------------------
+        Average_velocity (float): 平均速度
+        """
+        # 速度のステップ積分値
+        df[self.df_processed_columns.Velocity_times_dt] = abs(
+            df[self.df_simout_columns.ego_v] * dt
+        )
+        return df
+
     def calculate_total_mileage(self, dt: float, df: pd.DataFrame) -> float:
         """
         走行距離を計算
@@ -73,9 +91,7 @@ class MetricCalculator:
         Average_velocity (float): 平均速度
         """
         # 速度のステップ積分値
-        df[self.df_processed_columns.Velocity_times_dt] = (
-            df[self.df_simout_columns.ego_v] * dt
-        )
+        df = self.add_mileage_column(dt=dt, df=df)
         total_mileage = df[self.df_processed_columns.Velocity_times_dt].sum()
         return total_mileage
 
